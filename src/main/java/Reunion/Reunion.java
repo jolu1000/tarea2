@@ -4,6 +4,13 @@ import java.time.Instant;
 import java.time.Duration;
 import java.util.List;
 import java.util.ArrayList;
+import Depatramento.Empleado;
+import Depatramento.Asistencia;
+
+
+
+
+
 
 abstract public class Reunion {
 
@@ -36,7 +43,7 @@ abstract public class Reunion {
 
     public List<Empleado> obtenerAusencia() {
 
-        return new ArrayList<>(); // Placeholder, deberías comparar con una lista de invitados.
+        return new ArrayList<>();
     }
 
     public List<Empleado> obtenerRetraso() {
