@@ -1,5 +1,5 @@
 package Reunion;
 
 public enum tipoReunion {
-    TECNICA, MARKETING, OTRO
+    TECNICA, MARKETING, OTRO;
 }

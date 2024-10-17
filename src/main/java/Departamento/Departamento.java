@@ -1,5 +1,4 @@
-package Depatramento;
-import Reunion.tipoReunion;
+package Departamento;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,6 @@ public class Departamento {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
 
     public List<Empleado> getEmpleados() {
         return empleados;

@@ -1,4 +1,4 @@
-package Depatramento;
+package Departamento;
 
 import java.time.Instant;
 import Reunion.Retraso;

@@ -4,13 +4,9 @@ import java.time.Instant;
 import java.time.Duration;
 import java.util.List;
 import java.util.ArrayList;
-import Depatramento.Empleado;
-import Depatramento.Asistencia;
 
-
-
-
-
+import Departamento.Asistencia;
+import Departamento.Empleado;
 
 abstract public class Reunion {
 

@@ -1,16 +1,16 @@
-package Depatramento;
-import Reunion.tipoReunion;
+package Departamento;
+
 public class Empleado {
     private String id;
     private String apellidos;
-    private String nombres;
+    private String nombre;
     private String correo;
 
 
-    public Empleado(String id, String apellidos, String nombres, String correo) {
+    public Empleado(String id, String apellidos, String nombre, String correo) {
         this.id = id;
         this.apellidos = apellidos;
-        this.nombres = nombres;
+        this.nombre = nombre;
         this.correo = correo;
     }
 
@@ -22,8 +22,8 @@ public class Empleado {
         return apellidos;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getNombre() {
+        return nombre;
     }
 
     public String getCorreo() {
