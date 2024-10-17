@@ -1,5 +1,4 @@
 package Reunion;
-
 import java.time.Instant;
 
 public class Retraso {

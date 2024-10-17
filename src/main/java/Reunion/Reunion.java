@@ -4,7 +4,6 @@ import java.time.Instant;
 import java.time.Duration;
 import java.util.List;
 import java.util.ArrayList;
-
 import Departamento.Asistencia;
 import Departamento.Empleado;
 
@@ -17,6 +16,7 @@ abstract public class Reunion {
     private Instant horaInicio;
 
     private Empleado organizador;
+    private List<Empleado> invitados = new ArrayList<>();
     private List<Asistencia> asistencias = new ArrayList<>();
     private tipoReunion tipo;
 
@@ -24,6 +24,7 @@ abstract public class Reunion {
     public Reunion(Empleado organizador, tipoReunion tipo) {
         this.organizador = organizador;
         this.tipo = tipo;
+        this.invitados = invitados;
     }
 
 
@@ -38,8 +39,11 @@ abstract public class Reunion {
     }
 
     public List<Empleado> obtenerAusencia() {
-
-        return new ArrayList<>();
+        List<Empleado> ausentes = new ArrayList<>(invitados); // Todos los invitados inicialmente son ausentes
+        for (Asistencia asistencia : asistencias) {
+            ausentes.remove(asistencia.getEmpleado()); // Elimina los asistentes de la lista de ausentes
+        }
+        return ausentes;
     }
 
     public List<Empleado> obtenerRetraso() {
@@ -57,7 +61,7 @@ abstract public class Reunion {
     }
 
     public float obtenerPorcentajeAsistencia() {
-        int totalInvitados = asistencias.size();
+        int totalInvitados = invitados.size();
         if (totalInvitados == 0) return 0;
         return (float) obtenerTotalAsistencia() / totalInvitados * 100;
     }
