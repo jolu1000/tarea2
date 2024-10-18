@@ -1,11 +1,15 @@
 package Reunion;
-import java.util.Date;
-import java.time.Instant;
-import java.time.Duration;
-import java.util.List;
-import java.util.ArrayList;
+
 import Departamento.Asistencia;
 import Departamento.Empleado;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 abstract public class Reunion {
 
@@ -20,11 +24,17 @@ abstract public class Reunion {
     private tipoReunion tipo;
     private List<Nota> notas = new ArrayList<>();
 
-
+    // Constructor
     public Reunion(Empleado organizador, tipoReunion tipo, Duration duracionPrevista) {
         this.organizador = organizador;
         this.tipo = tipo;
         this.duracionPrevista = duracionPrevista;
+    }
+
+    // Métodos para gestionar la asistencia
+
+    public void agregarInvitado(Empleado empleado) {
+        invitados.add(empleado);
     }
 
     public List<Empleado> obtenerAsistencia() {
@@ -48,7 +58,7 @@ abstract public class Reunion {
         for (Asistencia asistencia : asistencias) {
             Duration retraso = asistencia.getRetraso();
             if (retraso != null && !retraso.isZero() && !retraso.isNegative()) {  // Verifica que haya un retraso positivo
-                retrasados.add(asistencia.getEmpleado());  // Añade solo al empleado con retraso
+                retrasados.add(asistencia.getEmpleado());
             }
         }
         return retrasados;
@@ -72,6 +82,7 @@ abstract public class Reunion {
         }
     }
 
+    // Métodos para iniciar y finalizar la reunión
     public void iniciar() {
         this.horaInicio = Instant.now();
     }
@@ -80,15 +91,55 @@ abstract public class Reunion {
         this.horaFin = Instant.now();
     }
 
+    // Método para agregar asistencia
     public void agregarAsistencia(Asistencia asistencia) {
         asistencias.add(asistencia);
+    }
+
+    // Método para agregar una nota
+    public void agregarNota(Nota nota) {
+        notas.add(nota);
+    }
+
+    // Método para generar el informe de la reunión
+    public void generarInforme() {
+        InformeReunion informe = new InformeReunion(this);
+        informe.generar();
+    }
+
+    // Getters para acceder a los datos necesarios para el informe
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public Instant getHoraInicio() {
+        return horaInicio;
+    }
+
+    public Instant getHoraFin() {
+        return horaFin;
+    }
+
+    public Duration getDuracionPrevista() {
+        return duracionPrevista;
+    }
+
+    public tipoReunion getTipo() {
+        return tipo;
+    }
+
+    public List<Empleado> getInvitados() {
+        return invitados;
     }
 
     public List<Asistencia> getAsistencias() {
         return asistencias;
     }
 
-    // Getters y Setters para el organizador y el tipo
+    public List<Nota> getNotas() {
+        return notas;
+    }
+
     public Empleado getOrganizador() {
         return organizador;
     }
@@ -97,26 +148,18 @@ abstract public class Reunion {
         this.organizador = organizador;
     }
 
-    public tipoReunion getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(tipoReunion tipo) {
-        this.tipo = tipo;
-    }
-
-    public Duration getDuracionPrevista() {
-        return duracionPrevista;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public void setDuracionPrevista(Duration duracionPrevista) {
         this.duracionPrevista = duracionPrevista;
     }
-    public void agregarNota(Nota nota) {
-        notas.add(nota);
-    }
-    public List<Nota> obtenerNotas() {
-        return notas;
+
+    public void setTipo(tipoReunion tipo) {
+        this.tipo = tipo;
     }
 }
+
+
 
