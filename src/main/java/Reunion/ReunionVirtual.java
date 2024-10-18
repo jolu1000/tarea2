@@ -1,11 +1,12 @@
 package Reunion;
 import Departamento.Empleado;
+import java.time.Duration;
 
 public class ReunionVirtual extends Reunion {
     private String enlace;
 
-    public ReunionVirtual(Empleado organizador, tipoReunion tipo, String enlace) {
-        super(organizador, tipo);
+    public ReunionVirtual(Empleado organizador, tipoReunion tipo, String enlace, Duration duracionPrevista) {
+        super(organizador, tipo, duracionPrevista);
         this.enlace = enlace;
     }
     public String getEnlace() {

@@ -29,6 +29,7 @@ abstract public class Reunion {
         this.organizador = organizador;
         this.tipo = tipo;
         this.duracionPrevista = duracionPrevista;
+        this.asistencias = new ArrayList<>();
     }
 
     // Métodos para gestionar la asistencia

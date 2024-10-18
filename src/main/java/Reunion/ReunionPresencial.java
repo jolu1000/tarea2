@@ -1,12 +1,15 @@
 package Reunion;
 import Departamento.Empleado;
+import Reunion.tipoReunion;
+import java.time.Duration;
+
 
 public class ReunionPresencial extends Reunion {
     private String sala;
 
 
-    public ReunionPresencial(Empleado organizador, tipoReunion tipo, String sala) {
-        super(organizador, tipo);
+    public ReunionPresencial(Empleado organizador, tipoReunion tipo, String sala, Duration duracionPrevista) {
+        super(organizador, tipo, duracionPrevista);
         this.sala = sala;
     }
     // Getter para sala
