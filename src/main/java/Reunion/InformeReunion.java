@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Duration;
-
 import Departamento.Asistencia;
 
 public class InformeReunion {
@@ -16,11 +15,17 @@ public class InformeReunion {
         this.reunion = reunion;
     }
 
-    public void generar() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("informe_reunion.txt"))) {
-            // Escribir la fecha de la reunión
+    // Cambiamos la firma del método para que acepte un archivo como argumento
+    public void generar(String rutaArchivo) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
             writer.write("Informe de la Reunión\n");
-            writer.write("Fecha: " + reunion.getFecha().toString() + "\n");
+
+            // Validar y escribir la fecha
+            if (reunion.getFecha() != null) {
+                writer.write("Fecha: " + reunion.getFecha().toString() + "\n");
+            } else {
+                writer.write("Fecha: No especificada\n");
+            }
 
             // Escribir la hora de inicio y fin
             writer.write("Hora de inicio: " + reunion.getHoraInicio() + "\n");
@@ -60,3 +65,4 @@ public class InformeReunion {
         }
     }
 }
+

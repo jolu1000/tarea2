@@ -32,7 +32,10 @@ abstract public class Reunion {
         this.asistencias = new ArrayList<>();
     }
 
-    // Métodos para gestionar la asistencia
+    public void iniciar() {
+        this.fecha = new Date(); // Fecha actual
+        this.horaInicio = Instant.now();
+    }
 
     public void agregarInvitado(Empleado empleado) {
         invitados.add(empleado);
@@ -83,10 +86,6 @@ abstract public class Reunion {
         }
     }
 
-    // Métodos para iniciar y finalizar la reunión
-    public void iniciar() {
-        this.horaInicio = Instant.now();
-    }
 
     public void finalizar() {
         this.horaFin = Instant.now();
@@ -103,9 +102,9 @@ abstract public class Reunion {
     }
 
     // Método para generar el informe de la reunión
-    public void generarInforme() {
+    public void generarInforme(String rutaArchivo) {
         InformeReunion informe = new InformeReunion(this);
-        informe.generar();
+        informe.generar(rutaArchivo); // Pasar la ruta del archivo aquí
     }
 
     // Getters para acceder a los datos necesarios para el informe
