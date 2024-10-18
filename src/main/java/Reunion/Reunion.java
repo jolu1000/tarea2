@@ -18,6 +18,7 @@ abstract public class Reunion {
     private List<Empleado> invitados = new ArrayList<>();
     private List<Asistencia> asistencias = new ArrayList<>();
     private tipoReunion tipo;
+    private List<Nota> notas = new ArrayList<>();
 
 
     public Reunion(Empleado organizador, tipoReunion tipo, Duration duracionPrevista) {
@@ -110,6 +111,12 @@ abstract public class Reunion {
 
     public void setDuracionPrevista(Duration duracionPrevista) {
         this.duracionPrevista = duracionPrevista;
+    }
+    public void agregarNota(Nota nota) {
+        notas.add(nota);
+    }
+    public List<Nota> obtenerNotas() {
+        return notas;
     }
 }
 

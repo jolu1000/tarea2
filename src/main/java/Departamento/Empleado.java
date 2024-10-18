@@ -1,6 +1,7 @@
 package Departamento;
+import Main.Invitable;
 
-public class Empleado {
+public class Empleado implements Invitable {
     private String id;
     private String apellidos;
     private String nombre;
@@ -13,6 +14,10 @@ public class Empleado {
         this.nombre = nombre;
         this.correo = correo;
     }
+
+    @Override
+    public void invitar() {
+        System.out.println("Invitación enviada a: " + nombre + " " + apellidos);
 
     public String getId() {
         return id;

@@ -1,5 +1,5 @@
 package Main;
 
-interface Invitable {
+public interface Invitable {
     void invitar();
 }
