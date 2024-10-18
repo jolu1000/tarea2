@@ -1,12 +1,13 @@
 package Departamento;
 
 import java.time.Instant;
+import java.time.Duration;
 import Reunion.Retraso;
 
 public class Asistencia {
     private Empleado empleado;
     private Instant horaLlegada;
-    private Retraso retraso;
+    private Duration retraso;
 
     public Asistencia(Empleado empleado, Instant horaLlegada) {
         this.empleado = empleado;
@@ -21,11 +22,11 @@ public class Asistencia {
         return horaLlegada;
     }
 
-    public Retraso getRetraso() {
+    public Duration getRetraso() {
         return retraso;
     }
 
-    public void setRetraso(Retraso retraso) {
+    public void setRetraso(Duration retraso) {
         this.retraso = retraso;
     }
 }

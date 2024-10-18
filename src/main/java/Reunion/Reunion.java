@@ -10,10 +10,9 @@ import Departamento.Empleado;
 abstract public class Reunion {
 
     private Date fecha;
-    private Instant horaPrevista;
     private Duration duracionPrevista;
-    private Instant horaFin;
     private Instant horaInicio;
+    private Instant horaFin;
 
     private Empleado organizador;
     private List<Empleado> invitados = new ArrayList<>();
@@ -21,19 +20,16 @@ abstract public class Reunion {
     private tipoReunion tipo;
 
 
-    public Reunion(Empleado organizador, tipoReunion tipo) {
+    public Reunion(Empleado organizador, tipoReunion tipo, Duration duracionPrevista) {
         this.organizador = organizador;
         this.tipo = tipo;
-        this.invitados = invitados;
+        this.duracionPrevista = duracionPrevista;
     }
-
 
     public List<Empleado> obtenerAsistencia() {
         List<Empleado> asistentes = new ArrayList<>();
         for (Asistencia asistencia : asistencias) {
-            if (asistencia.getRetraso() == null) {
-                asistentes.add(asistencia.getEmpleado());
-            }
+            asistentes.add(asistencia.getEmpleado());
         }
         return asistentes;
     }
@@ -49,8 +45,9 @@ abstract public class Reunion {
     public List<Empleado> obtenerRetraso() {
         List<Empleado> retrasados = new ArrayList<>();
         for (Asistencia asistencia : asistencias) {
-            if (asistencia.getRetraso() != null) {  // Si el empleado tiene un retraso registrado
-                retrasados.add(asistencia.getEmpleado());
+            Duration retraso = asistencia.getRetraso();
+            if (retraso != null && !retraso.isZero() && !retraso.isNegative()) {  // Verifica que haya un retraso positivo
+                retrasados.add(asistencia.getEmpleado());  // Añade solo al empleado con retraso
             }
         }
         return retrasados;
@@ -82,7 +79,6 @@ abstract public class Reunion {
         this.horaFin = Instant.now();
     }
 
-
     public void agregarAsistencia(Asistencia asistencia) {
         asistencias.add(asistencia);
     }
@@ -108,6 +104,12 @@ abstract public class Reunion {
         this.tipo = tipo;
     }
 
+    public Duration getDuracionPrevista() {
+        return duracionPrevista;
+    }
 
+    public void setDuracionPrevista(Duration duracionPrevista) {
+        this.duracionPrevista = duracionPrevista;
+    }
 }
 
