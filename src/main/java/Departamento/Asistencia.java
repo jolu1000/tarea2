@@ -1,17 +1,17 @@
 package Departamento;
 
 import java.time.Instant;
-import java.time.Duration;
 import Reunion.Retraso;
 
 public class Asistencia {
     private Empleado empleado;
     private Instant horaLlegada;
-    private Duration retraso;
+    private Retraso retraso; // Cambiar de Duration a Retraso
 
     public Asistencia(Empleado empleado, Instant horaLlegada) {
         this.empleado = empleado;
         this.horaLlegada = horaLlegada;
+        this.retraso = null; // Inicialmente no hay retraso
     }
 
     public Empleado getEmpleado() {
@@ -22,11 +22,21 @@ public class Asistencia {
         return horaLlegada;
     }
 
-    public Duration getRetraso() {
+    public Retraso getRetraso() {
         return retraso;
     }
 
-    public void setRetraso(Duration retraso) {
-        this.retraso = retraso;
+    public void setRetraso(Retraso retraso) {
+        this.retraso = retraso; // Ahora se establece un objeto Retraso
+    }
+
+    @Override
+    public String toString() {
+        String resultado = empleado.getNombre() + " " + empleado.getApellidos(); // Nombre completo
+        if (retraso != null) {
+            resultado += " (retraso: " + retraso.getHora().toString() + ")"; // Mostrar la hora del retraso
+        }
+        return resultado;
     }
 }
+

@@ -1,8 +1,8 @@
 import Departamento.Asistencia;
 import Departamento.Empleado;
+import Reunion.Retraso;
 import org.junit.jupiter.api.*;
 
-import java.time.Duration;
 import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,7 +40,8 @@ class AsistenciaTest {
         assertNull(asistencia.getRetraso(), "El retraso debe ser nulo al inicio.");
 
         // Establecer un retraso
-        Duration retraso = Duration.ofMinutes(10);
+        Instant horaRetraso = Instant.now().plusSeconds(600); // 10 minutos de retraso
+        Retraso retraso = new Retraso(horaRetraso);
         asistencia.setRetraso(retraso);
 
         // Verificar que el retraso se haya establecido correctamente

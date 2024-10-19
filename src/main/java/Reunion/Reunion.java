@@ -2,9 +2,7 @@ package Reunion;
 
 import Departamento.Asistencia;
 import Departamento.Empleado;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -12,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 
 abstract public class Reunion {
-
     private Date fecha;
     private Duration duracionPrevista;
     private Instant horaInicio;
@@ -60,8 +57,7 @@ abstract public class Reunion {
     public List<Empleado> obtenerRetraso() {
         List<Empleado> retrasados = new ArrayList<>();
         for (Asistencia asistencia : asistencias) {
-            Duration retraso = asistencia.getRetraso();
-            if (retraso != null && !retraso.isZero() && !retraso.isNegative()) {  // Verifica que haya un retraso positivo
+            if (asistencia.getRetraso() != null) { // Verifica que haya un retraso registrado
                 retrasados.add(asistencia.getEmpleado());
             }
         }
@@ -85,7 +81,6 @@ abstract public class Reunion {
             return Duration.ZERO;
         }
     }
-
 
     public void finalizar() {
         this.horaFin = Instant.now();
@@ -160,6 +155,7 @@ abstract public class Reunion {
         this.tipo = tipo;
     }
 }
+
 
 
 
