@@ -1,8 +1,6 @@
 package Reunion;
-
 import Departamento.Asistencia;
 import Departamento.Empleado;
-
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;

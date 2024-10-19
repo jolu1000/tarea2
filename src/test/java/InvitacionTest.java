@@ -1,9 +1,7 @@
 import Main.Invitacion;
 import Reunion.Reunion;
 import org.junit.jupiter.api.*;
-
 import java.time.Instant;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class InvitacionTest {
@@ -50,4 +48,3 @@ class InvitacionTest {
         assertEquals(nuevaHora, invitacion.getHora(), "La hora de la invitación debe ser la nueva hora asignada.");
     }
 }
-

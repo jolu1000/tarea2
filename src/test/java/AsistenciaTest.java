@@ -2,9 +2,7 @@ import Departamento.Asistencia;
 import Departamento.Empleado;
 import Reunion.Retraso;
 import org.junit.jupiter.api.*;
-
 import java.time.Instant;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class AsistenciaTest {

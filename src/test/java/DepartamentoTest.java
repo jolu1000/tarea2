@@ -1,7 +1,6 @@
 import Departamento.Departamento;
 import Departamento.Empleado;
 import org.junit.jupiter.api.*;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class DepartamentoTest {
@@ -45,4 +44,3 @@ class DepartamentoTest {
         Assertions.assertDoesNotThrow(() -> departamento.invitar(), "No debería lanzar excepciones al invitar a los empleados.");
     }
 }
-

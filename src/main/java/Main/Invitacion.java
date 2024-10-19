@@ -1,6 +1,5 @@
 package Main;
 import Reunion.Reunion;
-
 import java.time.Instant;
 
 public class Invitacion {

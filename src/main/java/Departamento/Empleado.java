@@ -1,5 +1,4 @@
 package Departamento;
-
 import Main.Invitable;
 
 public class Empleado implements Invitable {
