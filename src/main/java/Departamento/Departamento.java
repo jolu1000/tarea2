@@ -40,5 +40,21 @@ public class Departamento implements Invitable{
     public List<Empleado> getEmpleados() {
         return empleados;
     }
+
+    @Override
+    public String toString() {
+        String resultado = "Departamento: " + nombre + "\n";
+        resultado += "Empleados:\n";
+
+        if (empleados.isEmpty()) {
+            resultado += "No hay empleados en este departamento.";
+        } else {
+            for (Empleado empleado : empleados) {
+                resultado += empleado.getNombre() + " " + empleado.getApellidos() + "\n"; // Asumiendo que Empleado tiene getNombre() y getApellidos()
+            }
+        }
+
+        return resultado;
+    }
 }
 

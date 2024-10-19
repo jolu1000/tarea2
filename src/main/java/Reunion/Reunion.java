@@ -152,6 +152,18 @@ abstract public class Reunion {
     public void setTipo(tipoReunion tipo) {
         this.tipo = tipo;
     }
+
+    @Override
+    public String toString() {
+        String resultado = "Reunión organizada por " + organizador.toString() +
+                "; fecha: " + fecha +
+                "; duración prevista: " + duracionPrevista.toHours() + " horas" +
+                "; asistentes: ";
+        for (Asistencia asistencia : asistencias) {
+            resultado += asistencia.toString() + "; ";
+        }
+        return resultado;
+    }
 }
 
 

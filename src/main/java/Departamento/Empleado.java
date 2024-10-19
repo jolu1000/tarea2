@@ -34,5 +34,10 @@ public class Empleado implements Invitable {
     public String getCorreo() {
         return correo;
     }
+
+    @Override
+    public String toString() {
+        return nombre + " " + apellidos + ", id: " + id + ", correo: " + correo;
+    }
 }
 

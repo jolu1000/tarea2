@@ -1,5 +1,4 @@
 import Reunion.Reunion;
-import Reunion.ReunionVirtual;
 import Reunion.ReunionPresencial;
 import Reunion.tipoReunion;
 import org.junit.jupiter.api.AfterEach;
@@ -43,9 +42,8 @@ class ReunionTest {
 
     @Test
     public void testAgregarAsistencia() {
-        Instant horaLlegada = Instant.now();
-        Instant horaPrevista = Instant.now().plusSeconds(30);;
-        Asistencia asistencia = new Asistencia(empleado1, horaLlegada, horaPrevista);
+        Instant horaPrevista = Instant.now();
+        Asistencia asistencia = new Asistencia(empleado1, horaPrevista);
         reunion.agregarAsistencia(asistencia);
 
         Assertions.assertEquals(1, reunion.getAsistencias().size());
@@ -59,9 +57,8 @@ class ReunionTest {
 
         Assertions.assertEquals(2, reunion.obtenerAusencia().size()); // Ambos son ausentes al principio
 
-        Instant horaLlegada = Instant.now();
-        Instant horaPrevista = Instant.now().plusSeconds(30);;
-        Asistencia asistencia = new Asistencia(empleado1, horaLlegada, horaPrevista);
+        Instant horaPrevista = Instant.now();;
+        Asistencia asistencia = new Asistencia(empleado1, horaPrevista);
         reunion.agregarAsistencia(asistencia);
 
         Assertions.assertEquals(1, reunion.obtenerAusencia().size()); // Solo empleado2 es ausente
@@ -69,9 +66,8 @@ class ReunionTest {
 
     @Test
     public void testObtenerRetraso() {
-        Instant horaPrevista = Instant.now().plusSeconds(10); // Hora prevista 10 segundos después
-        Instant horaLlegada = Instant.now().plusSeconds(20); // Empleado llega 20 segundos después
-        Asistencia asistencia = new Asistencia(empleado1, horaLlegada, horaPrevista);
+        Instant horaPrevista = Instant.now(); // Hora prevista 10 segundos después
+        Asistencia asistencia = new Asistencia(empleado1, horaPrevista);
         reunion.agregarAsistencia(asistencia);
 
         Assertions.assertEquals(1, reunion.obtenerRetraso().size()); // Debería haber 1 empleado retrasado
@@ -80,8 +76,8 @@ class ReunionTest {
 
     @Test
     public void testObtenerTotalAsistencia() {
-        reunion.agregarAsistencia(new Asistencia(empleado1, Instant.now(),Instant.now().plusSeconds(20)));
-        reunion.agregarAsistencia(new Asistencia(empleado2, Instant.now(),Instant.now().plusSeconds(20)));
+        reunion.agregarAsistencia(new Asistencia(empleado1, Instant.now()));
+        reunion.agregarAsistencia(new Asistencia(empleado2, Instant.now()));
 
         Assertions.assertEquals(2, reunion.obtenerTotalAsistencia());
     }
@@ -91,7 +87,7 @@ class ReunionTest {
         reunion.getInvitados().add(empleado1);
         reunion.getInvitados().add(empleado2);
 
-        reunion.agregarAsistencia(new Asistencia(empleado1, Instant.now(),Instant.now().plusSeconds(20)));
+        reunion.agregarAsistencia(new Asistencia(empleado1, Instant.now()));
 
         Assertions.assertEquals(50.0, reunion.obtenerPorcentajeAsistencia(), 0.01);
     }
