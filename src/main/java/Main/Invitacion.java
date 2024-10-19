@@ -3,7 +3,7 @@ import Reunion.Reunion;
 
 import java.time.Instant;
 
-class Invitacion {
+public class Invitacion {
     private Instant hora;
 
     public Invitacion(Instant hora, Reunion reunion) {
