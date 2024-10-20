@@ -47,7 +47,7 @@ class DepartamentoTest {
         departamento.agregarEmpleado(empleado1);
         departamento.agregarEmpleado(empleado2);
 
-        Reunion reunion = new ReunionVirtual(empleado1, tipoReunion.TECNICA, "https://zoom.us/j/1234567890", Duration.ofMinutes(90));
+        Reunion reunion = new ReunionVirtual(empleado1, tipoReunion.TECNICA, "https://zoom.us/j/1234567890", Duration.ofMinutes(90), Instant.now());
         Invitacion invitacion = new Invitacion(Instant.now(), reunion);
 
         // Aquí puedes usar un sistema de captura de salida (Output Stream) para verificar la salida del método invitar()

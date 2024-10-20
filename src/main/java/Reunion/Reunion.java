@@ -12,6 +12,7 @@ abstract public class Reunion {
     private Duration duracionPrevista;
     private Instant horaInicio;
     private Instant horaFin;
+    private Instant horaPrevista;
 
     private Empleado organizador;
     private List<Empleado> invitados = new ArrayList<>();
@@ -20,15 +21,16 @@ abstract public class Reunion {
     private List<Nota> notas = new ArrayList<>();
 
     // Constructor
-    public Reunion(Empleado organizador, tipoReunion tipo, Duration duracionPrevista) {
+    public Reunion(Empleado organizador, tipoReunion tipo, Duration duracionPrevista, Instant horaPrevista) {
         this.organizador = organizador;
         this.tipo = tipo;
         this.duracionPrevista = duracionPrevista;
         this.asistencias = new ArrayList<>();
+        this.horaPrevista = horaPrevista;
     }
 
     public void iniciar() {
-        this.fecha = new Date(); // Fecha actual
+        this.fecha = new Date();
         this.horaInicio = Instant.now();
     }
 
@@ -39,7 +41,11 @@ abstract public class Reunion {
     public List<Empleado> obtenerAsistencia() {
         List<Empleado> asistentes = new ArrayList<>();
         for (Asistencia asistencia : asistencias) {
-            asistentes.add(asistencia.getEmpleado());
+            Empleado empleado = asistencia.getEmpleado();
+            if (empleado == null) {
+                throw new IllegalArgumentException("El empleado no puede ser nulo en la lista de asistencias.");
+            }
+            asistentes.add(empleado);
         }
         return asistentes;
     }
@@ -51,11 +57,11 @@ abstract public class Reunion {
         }
         return ausentes;
     }
-
     public List<Empleado> obtenerRetraso() {
         List<Empleado> retrasados = new ArrayList<>();
         for (Asistencia asistencia : asistencias) {
-            if (asistencia.getRetraso() != null) { // Verifica que haya un retraso registrado
+            // Considerar retrasados solo a los que llegaron después de la hora prevista
+            if (asistencia.getHoraLlegada().isAfter(horaPrevista)) {
                 retrasados.add(asistencia.getEmpleado());
             }
         }

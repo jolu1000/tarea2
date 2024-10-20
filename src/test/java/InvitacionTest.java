@@ -18,7 +18,7 @@ class InvitacionTest {
         horaInvitacion = Instant.now();
 
         // Crear una instancia de Reunion (puedes usar un mock si es necesario)
-        reunion = new Reunion(null, null, null) {
+        reunion = new Reunion(null, null, null, null) {
             @Override
             public void iniciar() {
                 // Implementación vacía para pruebas

@@ -48,7 +48,7 @@ class EmpleadoTest {
     @Test
     public void testInvitar() {
 
-        Reunion reunion = new ReunionPresencial(empleado, tipoReunion.TECNICA, "Sala 101", Duration.ofMinutes(90));
+        Reunion reunion = new ReunionPresencial(empleado, tipoReunion.TECNICA, "Sala 101", Duration.ofMinutes(90),Instant.now());
         Invitacion invitacion = new Invitacion(Instant.now(), reunion);
 
         // Capturamos la salida en consola para verificarla

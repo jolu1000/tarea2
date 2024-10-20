@@ -1,6 +1,6 @@
 package Reunion;
 import Departamento.Empleado;
-import Reunion.tipoReunion;
+import java.time.Instant;
 import java.time.Duration;
 
 
@@ -8,8 +8,11 @@ public class ReunionPresencial extends Reunion {
     private String sala;
 
 
-    public ReunionPresencial(Empleado organizador, tipoReunion tipo, String sala, Duration duracionPrevista) {
-        super(organizador, tipo, duracionPrevista);
+    public ReunionPresencial(Empleado organizador, tipoReunion tipo, String sala, Duration duracion, Instant horaPrevista) {
+        super(organizador, tipo, duracion, horaPrevista);
+        if (duracion.isNegative() || duracion.isZero()) {
+            throw new IllegalArgumentException("La duración debe ser mayor que cero.");
+        }
         this.sala = sala;
     }
     // Getter para sala

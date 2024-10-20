@@ -19,7 +19,7 @@ class ReunionTest {
     @BeforeEach
     public void setUp(){
         organizador = new Empleado("1", "García", "Juan", "juan.garcia@example.com");
-        reunion = new ReunionPresencial(organizador, tipoReunion.TECNICA, "Sala 101", Duration.ofMinutes(90));
+        reunion = new ReunionPresencial(organizador, tipoReunion.TECNICA, "Sala 101", Duration.ofMinutes(90), Instant.now());
         empleado1 = new Empleado("2", "Pérez", "Ana", "ana.perez@example.com");
         empleado2 = new Empleado("3", "López", "Carlos", "carlos.lopez@example.com");
     }
@@ -66,8 +66,11 @@ class ReunionTest {
 
     @Test
     public void testObtenerRetraso() {
-        Instant horaPrevista = Instant.now(); // Hora prevista 10 segundos después
-        Asistencia asistencia = new Asistencia(empleado1, horaPrevista);
+        Instant horaPrevista = Instant.now().minusSeconds(10); // Hora prevista hace 10 segundos
+        reunion = new ReunionPresencial(organizador, tipoReunion.TECNICA, "Sala 101", Duration.ofMinutes(90), horaPrevista); // Usar hora prevista
+
+        Instant horaLlegada = Instant.now(); // Hora actual (empleado llega tarde)
+        Asistencia asistencia = new Asistencia(empleado1, horaLlegada);
         reunion.agregarAsistencia(asistencia);
 
         Assertions.assertEquals(1, reunion.obtenerRetraso().size()); // Debería haber 1 empleado retrasado
@@ -106,6 +109,45 @@ class ReunionTest {
 
         Duration tiempoReal = reunion.calcularTiempoReal();
         Assertions.assertTrue(tiempoReal.toMillis() >= 1000); // Debe ser al menos 1 segundo
+    }
+    @Test
+    public void testObtenerAsistenciaConEmpleadoNulo() {
+        // Crea una asistencia con un empleado nulo
+        Asistencia asistenciaNula = new Asistencia(null, Instant.now());
+
+        // Agrega la asistencia a la reunión
+        reunion.agregarAsistencia(asistenciaNula);
+
+        // Verifica que se lanza la excepción
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            reunion.obtenerAsistencia();
+        });
+    }
+
+    @Test
+    public void testReunionConDuracionNegativa() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new ReunionPresencial(organizador, tipoReunion.TECNICA, "Sala 101", Duration.ofMinutes(-30), Instant.now());
+        }, "No debería permitir la creación de una reunión con duración negativa");
+    }
+
+    @Test
+    public void testReunionConDuracionCero() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new ReunionPresencial(organizador, tipoReunion.TECNICA, "Sala 101", Duration.ZERO, Instant.now());
+        }, "No debería permitir la creación de una reunión con duración cero");
+    }
+
+    @Test
+    public void testObtenerRetrasoJustoATiempo() {
+        Instant horaPrevista = Instant.now(); // Hora prevista
+        reunion = new ReunionPresencial(organizador, tipoReunion.TECNICA, "Sala 101", Duration.ofMinutes(90), horaPrevista);
+
+        // Usar la misma hora para la llegada
+        Asistencia asistencia = new Asistencia(empleado1, horaPrevista);
+        reunion.agregarAsistencia(asistencia);
+
+        Assertions.assertEquals(0, reunion.obtenerRetraso().size(), "No debería haber retrasos si el empleado llegó a tiempo");
     }
 
 }

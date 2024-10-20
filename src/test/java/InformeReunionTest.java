@@ -33,7 +33,7 @@ class InformeReunionTest {
         empleado2 = new Empleado("3", "López", "Carlos", "carlos.lopez@example.com");
 
         // Crear una reunión presencial para las pruebas
-        reunion = new ReunionPresencial(organizador, tipoReunion.TECNICA, "Sala 101", Duration.ofMinutes(90));
+        reunion = new ReunionPresencial(organizador, tipoReunion.TECNICA, "Sala 101", Duration.ofMinutes(90), Instant.now());
 
         // Inicializar fecha de la reunión
         reunion.setFecha(new Date());
