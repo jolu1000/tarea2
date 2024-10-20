@@ -14,7 +14,13 @@ import java.time.Instant;
 import java.util.Date;
 
 class InformeReunionTest {
-
+    /**
+     * La clase InformeReunionTest muestra la ejecucion de distintos test empleados a los metodos
+     * dentro de la clase InformeReunion.
+     *
+     *  * @author Benjamin
+     *  * @author Joaquin
+     */
     private Reunion reunion;
     private InformeReunion informeReunion;
     private Empleado organizador;
@@ -41,7 +47,9 @@ class InformeReunionTest {
     public void tearDown() throws IOException {
         Files.deleteIfExists(tempFile);
     }
-
+    /**
+     * Verifica que el informe de la reunión se genera correctamente y contiene la información esperada.
+     */
     @Test
     public void testGenerarInforme() throws IOException {
         informeReunion.generar(tempFile.toString());
