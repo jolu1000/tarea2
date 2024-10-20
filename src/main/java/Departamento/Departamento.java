@@ -15,6 +15,15 @@ public class Departamento implements Invitable{
 
     @Override
     public void invitar(Invitacion invitacion) {
+        if (invitacion == null || invitacion.getReunion() == null) {
+            throw new IllegalArgumentException("La invitación o la reunión no pueden ser nulas.");
+        }
+
+        Empleado empleadoInvitado = invitacion.getReunion().getOrganizador(); // Asumiendo que la reunión tiene un organizador
+        if (!empleados.contains(empleadoInvitado)) {
+            throw new IllegalArgumentException("El empleado " + empleadoInvitado.getNombre() + " no está en el departamento.");
+        }
+
         System.out.println("Enviando invitaciones a todo el departamento: " + nombre);
         for (Empleado empleado : empleados) {
             empleado.invitar(invitacion); // Invitar a cada empleado del departamento
@@ -22,9 +31,15 @@ public class Departamento implements Invitable{
     }
 
     public void agregarEmpleado(Empleado empleado) {
+        if (empleado == null) {
+            throw new NullPointerException("No se puede agregar un empleado nulo.");
+        }
+        if (empleados.contains(empleado)) {
+            // No se permiten empleados duplicados, puedes lanzar una excepción o simplemente retornar
+            return; // O puedes lanzar una excepción si así lo prefieres
+        }
         empleados.add(empleado);
     }
-
 
     public int obtenerCantidadEmpleados() {
         return empleados.size();

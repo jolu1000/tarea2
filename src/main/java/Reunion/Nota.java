@@ -15,6 +15,9 @@ public class Nota {
     }
 
     public void setContenido(String contenido) {
+        if (contenido == null) {
+            throw new NullPointerException("El contenido no puede ser nulo.");
+        }
         this.contenido = contenido;
     }
 

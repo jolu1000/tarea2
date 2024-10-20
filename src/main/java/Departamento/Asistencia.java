@@ -9,6 +9,12 @@ public class Asistencia {
     private Retraso retraso; // Cambiar de Duration a Retraso
 
     public Asistencia(Empleado empleado, Instant horaLlegada) {
+        if (empleado == null) {
+            throw new NullPointerException("El empleado no puede ser nulo.");
+        }
+        if (horaLlegada == null) {
+            throw new NullPointerException("La hora de llegada no puede ser nula.");
+        }
         this.empleado = empleado;
         this.horaLlegada = horaLlegada;
         this.retraso = null; // Inicialmente no hay retraso

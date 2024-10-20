@@ -17,6 +17,16 @@ public class Empleado implements Invitable {
 
     @Override
     public void invitar(Invitacion invitacion) {
+        if (invitacion == null) {
+            throw new IllegalArgumentException("La invitación no puede ser nula.");
+        }
+        if (invitacion.getReunion() == null) {
+            throw new IllegalArgumentException("La reunión en la invitación no puede ser nula.");
+        }
+        if (invitacion.getReunion().getOrganizador() == null) {
+            throw new IllegalArgumentException("El organizador de la reunión no puede ser nulo.");
+        }
+
         System.out.println("Invitando al empleado: " + nombre + " " + apellidos);
         System.out.println("Invitación recibida: " + invitacion);
     }

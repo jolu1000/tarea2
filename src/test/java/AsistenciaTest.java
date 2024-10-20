@@ -45,4 +45,18 @@ class AsistenciaTest {
         // Verificar que el retraso se haya establecido correctamente
         assertEquals(retraso, asistencia.getRetraso(), "El retraso debe ser el que se asignó.");
     }
+
+    @Test
+    public void testCrearAsistenciaEmpleadoNulo() {
+        assertThrows(NullPointerException.class, () -> {
+            asistencia = new Asistencia(null, horaLlegada);
+        }, "Debería lanzar NullPointerException si el empleado es nulo.");
+    }
+
+    @Test
+    public void testCrearAsistenciaHoraNula() {
+        assertThrows(NullPointerException.class, () -> {
+            asistencia = new Asistencia(empleado, null);
+        }, "Debería lanzar NullPointerException si la hora de llegada es nula.");
+    }
 }

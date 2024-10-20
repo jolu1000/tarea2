@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DepartamentoTest {
 
@@ -54,4 +55,44 @@ class DepartamentoTest {
         // Para simplificar, simplemente verificamos que no hay excepciones en la llamada
         Assertions.assertDoesNotThrow(() -> departamento.invitar(invitacion), "No debería lanzar excepciones al invitar a los empleados.");
     }
+
+    @Test
+    public void testAgregarEmpleadoNulo() {
+        assertThrows(NullPointerException.class, () -> {
+            departamento.agregarEmpleado(null);
+        }, "Debería lanzar NullPointerException si se intenta agregar un empleado nulo.");
+    }
+
+    @Test
+    public void testInvitarSinEmpleados() {
+        Reunion reunion = new ReunionVirtual(empleado1, tipoReunion.TECNICA, "https://zoom.us/j/1234567890", Duration.ofMinutes(90), Instant.now());
+        Invitacion invitacion = new Invitacion(Instant.now(), reunion);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            departamento.invitar(invitacion);
+        }, "Debería lanzar IllegalStateException si no hay empleados en el departamento para invitar.");
+    }
+
+    @Test
+    public void testInvitarEmpleadoNoExistente() {
+        departamento.agregarEmpleado(empleado1); // Solo agregar empleado1
+
+        Reunion reunion = new ReunionVirtual(empleado2, tipoReunion.TECNICA, "https://zoom.us/j/1234567890", Duration.ofMinutes(90), Instant.now());
+        Invitacion invitacion = new Invitacion(Instant.now(), reunion);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            departamento.invitar(invitacion);
+        }, "Debería lanzar IllegalArgumentException si se intenta invitar a un empleado que no está en el departamento.");
+    }
+
+    @Test
+    public void testAgregarEmpleadoDuplicado() {
+        departamento.agregarEmpleado(empleado1);
+        assertEquals(1, departamento.obtenerCantidadEmpleados(), "La cantidad de empleados debe ser 1.");
+
+        departamento.agregarEmpleado(empleado1); // Agregar el mismo empleado nuevamente
+        assertEquals(1, departamento.obtenerCantidadEmpleados(), "La cantidad de empleados no debe aumentar al agregar un empleado duplicado.");
+    }
+
+
 }

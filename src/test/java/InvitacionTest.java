@@ -49,4 +49,18 @@ class InvitacionTest {
         // Verificar que la nueva hora se haya establecido correctamente
         assertEquals(nuevaHora, invitacion.getHora(), "La hora de la invitación debe ser la nueva hora asignada.");
     }
+
+    @Test
+    public void testCrearInvitacionConHoraFutura() {
+        Instant futuraHora = Instant.now().plusSeconds(7200); // Hora futura en 2 horas
+        Invitacion invitacionFutura = new Invitacion(futuraHora, reunion);
+        assertEquals(futuraHora, invitacionFutura.getHora(), "La hora de la invitación debe ser la misma que se asignó.");
+    }
+
+    @Test
+    public void testCrearInvitacionConHoraPasada() {
+        Instant pasadaHora = Instant.now().minusSeconds(7200); // Hora pasada en 2 horas
+        Invitacion invitacionPasada = new Invitacion(pasadaHora, reunion);
+        assertEquals(pasadaHora, invitacionPasada.getHora(), "La hora de la invitación debe ser la misma que se asignó.");
+    }
 }

@@ -54,4 +54,30 @@ class EmpleadoTest {
         // Capturamos la salida en consola para verificarla
         Assertions.assertDoesNotThrow(() -> empleado.invitar(invitacion), "El método invitar no debe lanzar excepción");
     }
+
+    @Test
+    public void testInvitarNullInvitacion() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            empleado.invitar(null);
+        }, "Debería lanzar IllegalArgumentException si la invitación es nula.");
+    }
+
+    @Test
+    public void testInvitarReunionNula() {
+        // Crea una invitación con reunión nula
+        Invitacion invitacion = new Invitacion(Instant.now(), null);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            empleado.invitar(invitacion);
+        }, "Debería lanzar IllegalArgumentException si la reunión en la invitación es nula.");
+    }
+
+    @Test
+    public void testInvitarSinOrganizador() {
+        // Crea una reunión donde el organizador es nulo
+        Reunion reunion = new ReunionPresencial(null, tipoReunion.TECNICA, "Sala 101", Duration.ofMinutes(90), Instant.now());
+        Invitacion invitacion = new Invitacion(Instant.now(), reunion);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            empleado.invitar(invitacion);
+        }, "Debería lanzar IllegalArgumentException si la reunión no tiene un organizador.");
+    }
 }
