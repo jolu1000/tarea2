@@ -1,8 +1,10 @@
-import Main.Invitacion;
 import Reunion.Reunion;
-import org.junit.jupiter.api.*;
+import Reunion.Invitacion;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import java.time.Instant;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class InvitacionTest {
 
@@ -28,7 +30,7 @@ class InvitacionTest {
             }
         };
 
-        // Crear una instancia de Invitacion
+        // Crear una instancia de Reunion.Invitacion
         invitacion = new Invitacion(horaInvitacion, reunion);
     }
 

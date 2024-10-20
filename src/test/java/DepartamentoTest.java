@@ -1,7 +1,15 @@
 import Departamento.Departamento;
 import Departamento.Empleado;
-import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
+import Reunion.Invitacion;
+import Reunion.Reunion;
+import Reunion.ReunionVirtual;
+import Reunion.tipoReunion;
+import java.time.Duration;
+import java.time.Instant;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DepartamentoTest {
 
@@ -39,8 +47,11 @@ class DepartamentoTest {
         departamento.agregarEmpleado(empleado1);
         departamento.agregarEmpleado(empleado2);
 
+        Reunion reunion = new ReunionVirtual(empleado1, tipoReunion.TECNICA, "https://zoom.us/j/1234567890", Duration.ofMinutes(90));
+        Invitacion invitacion = new Invitacion(Instant.now(), reunion);
+
         // Aquí puedes usar un sistema de captura de salida (Output Stream) para verificar la salida del método invitar()
         // Para simplificar, simplemente verificamos que no hay excepciones en la llamada
-        Assertions.assertDoesNotThrow(() -> departamento.invitar(), "No debería lanzar excepciones al invitar a los empleados.");
+        Assertions.assertDoesNotThrow(() -> departamento.invitar(invitacion), "No debería lanzar excepciones al invitar a los empleados.");
     }
 }

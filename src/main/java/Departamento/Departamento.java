@@ -1,7 +1,8 @@
 package Departamento;
 import java.util.ArrayList;
 import java.util.List;
-import Main.Invitable;
+import Reunion.Invitable;
+import Reunion.Invitacion;
 
 public class Departamento implements Invitable{
     private String nombre;
@@ -13,12 +14,13 @@ public class Departamento implements Invitable{
     }
 
     @Override
-    public void invitar() {
+    public void invitar(Invitacion invitacion) {
         System.out.println("Enviando invitaciones a todo el departamento: " + nombre);
         for (Empleado empleado : empleados) {
-            empleado.invitar(); // Invitar a cada empleado del departamento
+            empleado.invitar(invitacion); // Invitar a cada empleado del departamento
         }
     }
+
     public void agregarEmpleado(Empleado empleado) {
         empleados.add(empleado);
     }

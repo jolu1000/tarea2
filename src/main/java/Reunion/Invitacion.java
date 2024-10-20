@@ -1,5 +1,5 @@
-package Main;
-import Reunion.Reunion;
+package Reunion;
+
 import java.time.Instant;
 
 public class Invitacion {
@@ -9,13 +9,16 @@ public class Invitacion {
         this.hora = hora;
     }
 
-    // Getter para la hora de la invitación
     public Instant getHora() {
         return hora;
     }
 
-    // Setter para la hora de la invitación
     public void setHora(Instant hora) {
         this.hora = hora;
+    }
+
+    @Override
+    public String toString() {
+        return "Invitación a la reunión a las " + hora;
     }
 }

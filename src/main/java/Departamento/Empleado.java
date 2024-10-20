@@ -1,5 +1,6 @@
 package Departamento;
-import Main.Invitable;
+import Reunion.Invitable;
+import Reunion.Invitacion;
 
 public class Empleado implements Invitable {
     private String id;
@@ -15,8 +16,9 @@ public class Empleado implements Invitable {
     }
 
     @Override
-    public void invitar() {
-        System.out.println("Invitación enviada a: " + nombre + " " + apellidos);
+    public void invitar(Invitacion invitacion) {
+        System.out.println("Invitando al empleado: " + nombre + " " + apellidos);
+        System.out.println("Invitación recibida: " + invitacion);
     }
 
     public String getId() {

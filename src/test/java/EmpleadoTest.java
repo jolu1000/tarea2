@@ -1,8 +1,14 @@
-package Departamento;
+import Departamento.Empleado;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import Reunion.Reunion;
+import Reunion.ReunionPresencial;
+import Reunion.tipoReunion;
+import Reunion.Invitacion;
+import java.time.Duration;
+import java.time.Instant;
 
 class EmpleadoTest {
     private Empleado empleado;
@@ -41,7 +47,11 @@ class EmpleadoTest {
 
     @Test
     public void testInvitar() {
+
+        Reunion reunion = new ReunionPresencial(empleado, tipoReunion.TECNICA, "Sala 101", Duration.ofMinutes(90));
+        Invitacion invitacion = new Invitacion(Instant.now(), reunion);
+
         // Capturamos la salida en consola para verificarla
-        Assertions.assertDoesNotThrow(() -> empleado.invitar(), "El método invitar no debe lanzar excepción");
+        Assertions.assertDoesNotThrow(() -> empleado.invitar(invitacion), "El método invitar no debe lanzar excepción");
     }
 }
