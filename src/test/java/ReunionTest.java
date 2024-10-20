@@ -39,7 +39,6 @@ class ReunionTest {
         Assertions.assertEquals(0, reunion.getAsistencias().size());;
     }
 
-
     @Test
     public void testAgregarAsistencia() {
         Instant horaPrevista = Instant.now();
@@ -99,7 +98,6 @@ class ReunionTest {
     public void testCalcularTiempoReal() {
         reunion.iniciar();
         Instant horaInicio = reunion.getHoraInicio();
-        // Simulamos una espera para que la reunión dure un poco
         try {
             Thread.sleep(1000); // 1 segundo
         } catch (InterruptedException e) {
@@ -112,13 +110,8 @@ class ReunionTest {
     }
     @Test
     public void testObtenerAsistenciaConEmpleadoNulo() {
-        // Crea una asistencia con un empleado nulo
         Asistencia asistenciaNula = new Asistencia(null, Instant.now());
-
-        // Agrega la asistencia a la reunión
         reunion.agregarAsistencia(asistenciaNula);
-
-        // Verifica que se lanza la excepción
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             reunion.obtenerAsistencia();
         });

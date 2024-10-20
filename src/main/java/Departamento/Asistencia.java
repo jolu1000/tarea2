@@ -6,7 +6,7 @@ import Reunion.Retraso;
 public class Asistencia {
     private Empleado empleado;
     private Instant horaLlegada;
-    private Retraso retraso; // Cambiar de Duration a Retraso
+    private Retraso retraso;
 
     public Asistencia(Empleado empleado, Instant horaLlegada) {
         if (empleado == null) {
@@ -17,7 +17,7 @@ public class Asistencia {
         }
         this.empleado = empleado;
         this.horaLlegada = horaLlegada;
-        this.retraso = null; // Inicialmente no hay retraso
+        this.retraso = null;
     }
 
     public Empleado getEmpleado() {
@@ -33,14 +33,14 @@ public class Asistencia {
     }
 
     public void setRetraso(Retraso retraso) {
-        this.retraso = retraso; // Ahora se establece un objeto Retraso
+        this.retraso = retraso;
     }
 
     @Override
     public String toString() {
-        String resultado = empleado.getNombre() + " " + empleado.getApellidos(); // Nombre completo
+        String resultado = empleado.getNombre() + " " + empleado.getApellidos();
         if (retraso != null) {
-            resultado += " (retraso: " + retraso.getHora().toString() + ")"; // Mostrar la hora del retraso
+            resultado += " (retraso: " + retraso.getHora().toString() + ")";
         }
         return resultado;
     }

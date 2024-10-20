@@ -1,7 +1,4 @@
 package Reunion;
-import Departamento.Empleado;
-import Departamento.Asistencia;
-
 
 public class Nota {
     private String contenido;

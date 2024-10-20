@@ -22,7 +22,6 @@ public class ReunionVirtual extends Reunion {
         this.enlace = enlace;
     }
 
-    // Método toString para representar la información de la reunión virtual
     @Override
     public String toString() {
         return "Reunion Virtual [enlace=" + enlace + ", organizador=" + getOrganizador().getNombre() + "]";

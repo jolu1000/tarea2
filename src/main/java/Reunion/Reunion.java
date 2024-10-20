@@ -90,23 +90,19 @@ abstract public class Reunion {
         this.horaFin = Instant.now();
     }
 
-    // Método para agregar asistencia
     public void agregarAsistencia(Asistencia asistencia) {
         asistencias.add(asistencia);
     }
 
-    // Método para agregar una nota
     public void agregarNota(Nota nota) {
         notas.add(nota);
     }
 
-    // Método para generar el informe de la reunión
     public void generarInforme(String rutaArchivo) {
         InformeReunion informe = new InformeReunion(this);
-        informe.generar(rutaArchivo); // Pasar la ruta del archivo aquí
+        informe.generar(rutaArchivo);
     }
 
-    // Getters para acceder a los datos necesarios para el informe
     public Date getFecha() {
         return fecha;
     }

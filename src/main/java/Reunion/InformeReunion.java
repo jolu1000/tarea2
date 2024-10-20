@@ -14,12 +14,10 @@ public class InformeReunion {
         this.reunion = reunion;
     }
 
-    // Cambiamos la firma del método para que acepte un archivo como argumento
     public void generar(String rutaArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
             writer.write("Informe de la Reunión\n");
 
-            // Validar y escribir la fecha
             if (reunion.getFecha() != null) {
                 writer.write("Fecha: " + reunion.getFecha().toString() + "\n");
             } else {
@@ -30,28 +28,23 @@ public class InformeReunion {
             writer.write("Hora de inicio: " + reunion.getHoraInicio() + "\n");
             writer.write("Hora de fin: " + reunion.getHoraFin() + "\n");
 
-            // Duración de la reunión
             Duration duracionReal = reunion.calcularTiempoReal();
             writer.write("Duración real: " + duracionReal.toMinutes() + " minutos\n");
 
-            // Escribir el tipo de reunión
             writer.write("Tipo de reunión: " + reunion.getTipo().name() + "\n");
 
-            // Enlace o sala, dependiendo del tipo de reunión
             if (reunion instanceof ReunionVirtual) {
                 writer.write("Enlace de la reunión: " + ((ReunionVirtual) reunion).getEnlace() + "\n");
             } else if (reunion instanceof ReunionPresencial) {
                 writer.write("Sala de la reunión: " + ((ReunionPresencial) reunion).getSala() + "\n");
             }
 
-            // Lista de asistentes
             writer.write("Lista de asistentes:\n");
             for (Asistencia asistencia : reunion.getAsistencias()) {
                 Empleado empleado = asistencia.getEmpleado();
                 writer.write("- " + empleado.getNombre() + " " + empleado.getApellidos() + "\n");
             }
 
-            // Escribir las notas de la reunión
             writer.write("Notas de la reunión:\n");
             for (Nota nota : reunion.getNotas()) {
                 writer.write("- " + nota.getContenido() + "\n");

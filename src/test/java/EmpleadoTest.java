@@ -15,13 +15,11 @@ class EmpleadoTest {
 
     @BeforeEach
     public void setUp() {
-        // Inicializar un nuevo empleado antes de cada prueba
         empleado = new Empleado("1", "García", "Juan", "juan.garcia@example.com");
     }
 
     @AfterEach
     public void tearDown() {
-        // Limpiar la referencia al empleado después de cada prueba
         empleado = null;
     }
 
@@ -50,8 +48,6 @@ class EmpleadoTest {
 
         Reunion reunion = new ReunionPresencial(empleado, tipoReunion.TECNICA, "Sala 101", Duration.ofMinutes(90),Instant.now());
         Invitacion invitacion = new Invitacion(Instant.now(), reunion);
-
-        // Capturamos la salida en consola para verificarla
         Assertions.assertDoesNotThrow(() -> empleado.invitar(invitacion), "El método invitar no debe lanzar excepción");
     }
 
@@ -73,7 +69,6 @@ class EmpleadoTest {
 
     @Test
     public void testInvitarSinOrganizador() {
-        // Crea una reunión donde el organizador es nulo
         Reunion reunion = new ReunionPresencial(null, tipoReunion.TECNICA, "Sala 101", Duration.ofMinutes(90), Instant.now());
         Invitacion invitacion = new Invitacion(Instant.now(), reunion);
         Assertions.assertThrows(IllegalArgumentException.class, () -> {

@@ -1,10 +1,9 @@
 package Reunion;
-
 import java.time.Instant;
 
 public class Invitacion {
     private Instant hora;
-    private Reunion reunion; // Suponiendo que Reunion es una clase que tienes
+    private Reunion reunion;
 
     public Invitacion(Instant hora, Reunion reunion) {
         this.hora = hora;
@@ -16,7 +15,7 @@ public class Invitacion {
     }
 
     public Reunion getReunion() {
-        return reunion; // Este es el método que necesitas
+        return reunion;
     }
 
 

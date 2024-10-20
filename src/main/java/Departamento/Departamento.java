@@ -19,14 +19,14 @@ public class Departamento implements Invitable{
             throw new IllegalArgumentException("La invitación o la reunión no pueden ser nulas.");
         }
 
-        Empleado empleadoInvitado = invitacion.getReunion().getOrganizador(); // Asumiendo que la reunión tiene un organizador
+        Empleado empleadoInvitado = invitacion.getReunion().getOrganizador();
         if (!empleados.contains(empleadoInvitado)) {
             throw new IllegalArgumentException("El empleado " + empleadoInvitado.getNombre() + " no está en el departamento.");
         }
 
         System.out.println("Enviando invitaciones a todo el departamento: " + nombre);
         for (Empleado empleado : empleados) {
-            empleado.invitar(invitacion); // Invitar a cada empleado del departamento
+            empleado.invitar(invitacion);
         }
     }
 
@@ -35,8 +35,7 @@ public class Departamento implements Invitable{
             throw new NullPointerException("No se puede agregar un empleado nulo.");
         }
         if (empleados.contains(empleado)) {
-            // No se permiten empleados duplicados, puedes lanzar una excepción o simplemente retornar
-            return; // O puedes lanzar una excepción si así lo prefieres
+            return;
         }
         empleados.add(empleado);
     }
@@ -67,7 +66,7 @@ public class Departamento implements Invitable{
             resultado += "No hay empleados en este departamento.";
         } else {
             for (Empleado empleado : empleados) {
-                resultado += empleado.getNombre() + " " + empleado.getApellidos() + "\n"; // Asumiendo que Empleado tiene getNombre() y getApellidos()
+                resultado += empleado.getNombre() + " " + empleado.getApellidos() + "\n";
             }
         }
 
